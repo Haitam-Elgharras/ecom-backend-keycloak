@@ -3,11 +3,9 @@ package com.ecom.inventoryservice.web;
 import com.ecom.inventoryservice.entities.Product;
 import com.ecom.inventoryservice.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,7 +16,7 @@ public class ProductRestController {
     private final ProductRepository productRepository;
 
     @GetMapping("/products")
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<Product> productList(){
         return productRepository.findAll();
     }
